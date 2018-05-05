@@ -27,4 +27,10 @@ public class TestController {
     public String favoriteFood() {
         return "You just have memorize the few things I hate, since I am such a foodie.";
     }
+
+    @RequestMapping("/gender")
+    public String gender() {
+        return "I am a clever girl";
+
+    }
 }
