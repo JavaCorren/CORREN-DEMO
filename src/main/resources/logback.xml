@@ -38,6 +38,9 @@
     <!--配置日志的上下文名称-->
     <contextName>${log.context.name}</contextName>
 
+
+
+    <!--控制台日志输出配置，可以匹配色彩和高亮-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${log.pattern}</pattern>
@@ -46,6 +49,7 @@
         </encoder>
     </appender>
 
+    <!-- 服务器上使用的appender start -->
     <!-- 默认的file appender，按天切分日志 -->
     <appender name="ROLLING_FILE_DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<file>${log.directory}${log.context.name}/${HOSTNAME}-%d{yyyyMMdd}.log</file>-->
@@ -101,27 +105,24 @@
     <logger name="java.sql.ResultSet" level="debug" />
     <logger name="org.springframework" level="WARN" />
 
-    <root>
 
-        <springProfile name="local">
-            <level value="info"/>
-            <appender-ref ref="STDOUT" />
-        </springProfile>
-
-        <!--dohko环境用来测试，日志级别尽量可以设置的低，便于定位问题 -->
-        <springProfile name="test">
+    <!--dohko环境用来测试，日志级别尽量可以设置的低，便于定位问题 -->
+    <springProfile name="test">
+        <root>
             <level value="info"/>
             <appender-ref ref="STDOUT" />
             <appender-ref ref="ASYNC_FILE" />
             <appender-ref ref="ROLLING_FILE_ERROR" />
-        </springProfile>
+        </root>
+    </springProfile>
 
-        <!-- production为生产环境，需要记录能够定位问题或流程流转的日志，但是非必要的日志无须记录 -->
-        <springProfile name="production">
+    <!-- production为生产环境，需要记录能够定位问题或流程流转的日志，但是非必要的日志无须记录 -->
+    <springProfile name="production">
+        <root>
             <level value="info"/>
             <appender-ref ref="ASYNC_FILE" />
             <appender-ref ref="ROLLING_FILE_ERROR" />
-        </springProfile>
-    </root>
+        </root>
+    </springProfile>
 </configuration>
 
