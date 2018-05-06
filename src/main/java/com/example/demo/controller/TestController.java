@@ -46,7 +46,7 @@ public class TestController {
         return "I have a discount coupon for 30 AUD!, I can have so much for free!";
     }
 
-    @RequestMapping("love")
+    @RequestMapping("/love")
     public String love() {
         log.warn("love");
         return "My boyfriend is Corren Cheung! He's gonna marry me after my graduation from ANU!";
