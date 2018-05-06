@@ -39,4 +39,11 @@ public class TestController {
         return "I am a clever girl";
 
     }
+
+    @RequestMapping("/uberEat")
+    public String UBEREAT() {
+        log.warn("UBEREAT");
+        return "I have a discount coupon for 30 AUD!, I can have so much for free!";
+    }
+
 }
