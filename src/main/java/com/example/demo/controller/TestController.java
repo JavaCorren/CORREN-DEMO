@@ -52,4 +52,10 @@ public class TestController {
         return "My boyfriend is Corren Cheung! He's gonna marry me after my graduation from ANU!";
     }
 
+    @RequestMapping("/love")
+    public String trip() {
+        log.warn("trip");
+        return "I am going to Shanghai with my boyfriend accompanied by mom and granny.";
+    }
+
 }
