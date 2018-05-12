@@ -1,9 +1,5 @@
 package com.example.demo.dao;
 
-import org.apache.ibatis.io.Resources;
-
-import java.io.IOException;
-
 /**
  * mybatis学习类
  *
@@ -12,7 +8,4 @@ import java.io.IOException;
  **/
 public class MybatisLearning {
 
-    public static void main(String[] args) throws IOException {
-        Resources.getResourceAsStream("mybatis-config.xml");
-    }
 }
