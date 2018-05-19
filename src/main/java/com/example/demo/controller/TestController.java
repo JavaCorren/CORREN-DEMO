@@ -58,4 +58,10 @@ public class TestController {
         return "I am going to Shanghai with my boyfriend accompanied by mom and granny.";
     }
 
+    @RequestMapping("/aqi")
+    public String aqi() {
+        log.warn("aqi");
+        return "I am AQI";
+    }
+
 }
