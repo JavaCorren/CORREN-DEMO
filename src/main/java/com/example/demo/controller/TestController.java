@@ -61,7 +61,7 @@ public class TestController {
     @RequestMapping("/aqi")
     public String aqi() {
         log.warn("aqi");
-        return "I am AQI";
+        return "I am AQI!!!";
     }
 
 }
