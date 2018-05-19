@@ -29,6 +29,7 @@ public class TestController {
 
     @RequestMapping("/food")
     public String favoriteFood() {
+
         log.warn("food");
         return "You just have memorize the few things I hate, since I am such a foodie.";
     }
@@ -62,6 +63,12 @@ public class TestController {
     public String aqi() {
         log.warn("aqi");
         return "I am AQI!!!";
+    }
+
+    @RequestMapping("/aqi2")
+    public String aqi2() {
+        log.warn("aqi2");
+        return "I am AQI2!!!";
     }
 
 }
