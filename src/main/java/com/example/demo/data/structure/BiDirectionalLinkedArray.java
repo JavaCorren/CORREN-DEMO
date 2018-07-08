@@ -11,8 +11,10 @@ import lombok.Data;
 @Data
 public class BiDirectionalLinkedArray<T> {
 
+    //头节点
     private Node<T> head;
 
+    //数量
     private int count;
 
     public BiDirectionalLinkedArray(T t) {
@@ -33,6 +35,15 @@ public class BiDirectionalLinkedArray<T> {
 
         public Node(T param) {
             this.t = param;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "previous t =" + previous.getT() +
+                    ", next t =" + next.getT() +
+                    ", current t=" + t +
+                    '}';
         }
     }
 
@@ -60,24 +71,43 @@ public class BiDirectionalLinkedArray<T> {
     public boolean append(T t) {
 
         Node<T> target = new Node(t);
-
-        //当元素为空的时候
-        if (head == null) {
-            head = target;
-            head.next = head;
-            head.previous = head;
-            return true;
-        }
-
-        //链表不为空的时候
         Node<T> end = head.previous;
 
         //插入目标元素
         end.next = target;
         head.previous = target;
-        end = target;
+        target.previous = end;
+        target.next = head;
 
-        //插入指定位置
+        //数组大小自增
+        this.count++;
+        return true;
+    }
+
+    /**
+     * 在指定位置插入元素
+     * @param t
+     * @param index
+     * @return
+     */
+    public boolean insert(T t, int index) {
+
+        Node<T> target = new Node(t);
+
+        Node<T> prev = get(index);
+
+        if (prev == null) {
+            System.out.println("指定位置不存在");
+            return false;
+        }
+
+        Node<T> next = prev.next;
+
+        prev.next = target;
+        next.previous = target;
+        target.previous = prev;
+        target.next = next;
+
         this.count++;
         return true;
     }
@@ -89,11 +119,12 @@ public class BiDirectionalLinkedArray<T> {
      */
     public Node<T> find(T t) {
 
-        if (head == null) {
-            return null;
+        if (isEmpty()) {
+            throw new RuntimeException("The list is empty");
         }
 
         Node<T> current = head;
+
         Node<T> result = null;
 
         do {
@@ -101,16 +132,17 @@ public class BiDirectionalLinkedArray<T> {
 
             if (val.equals(t)) {
                 result = current;
+                break;
             } else {
                 current = current.next;
             }
-        } while (current.next != null);
+        } while(current.next != current) ;
 
         return result;
     }
 
     /**
-     *
+     * 获取指定位置的元素
      * @param index
      * @return
      * @should test
@@ -132,7 +164,7 @@ public class BiDirectionalLinkedArray<T> {
                 if (i == index) {
                     return current;
                 } else {
-                    current = head.next;
+                    current = current.next;
                 }
 
             }
@@ -140,12 +172,15 @@ public class BiDirectionalLinkedArray<T> {
 
         //在后半部分
         if (index > mid) {
+
+            current = head.previous;
+
             for (int i = count -1 ; i > mid; i--) {
 
                 if (i == index) {
                     return current;
                 } else {
-                    current = head.previous;
+                    current = current.previous;
                 }
             }
         }
