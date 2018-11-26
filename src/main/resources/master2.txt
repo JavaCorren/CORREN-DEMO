@@ -1,0 +1,2 @@
+
+I am the second file committed by Corren on master branch for testing the difference between git merge and rebase!
